@@ -250,17 +250,11 @@ public class Vungle extends CordovaPlugin {
 			this.validLicenseKey = false;
 		}
 		//if (!this.validLicenseKey)
-		//	Util.alert(cordova.getActivity(),"Cordova Vungle: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
+		//	Util.alert(cordova.getActivity(),"Cordova Vungle: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");
 	}
 	
 	private void _setUp(String appId) {
 		this.appId = appId;
-		
-		if (!validLicenseKey) {
-			if (new Random().nextInt(100) <= 1) {//0~99					
-				this.appId = TEST_APP_ID;
-			}
-		}
 
 		vunglePub.init(cordova.getActivity(), appId);
 		vunglePub.setEventListeners(new MyEventListener());//listener needs to come after init on android vunlge sdk

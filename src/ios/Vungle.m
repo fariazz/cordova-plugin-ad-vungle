@@ -109,12 +109,6 @@ static NSString *TEST_APP_ID = @"5556444b4b79673719000185";
 - (void) _setUp:(NSString *)appId {
 	self.appId = appId;
 
-	if (!validLicenseKey) {
-		if (arc4random() % 100 <= 1) {//0 ~ 99		
-			self.appId = TEST_APP_ID;
-		}
-	}
-	
     VungleSDK* sdk = [VungleSDK sharedSDK];
     [sdk setDelegate:self];//listener need to come before startWithAppId on ios vunlge sdk
     [sdk startWithAppId:appId];
