@@ -89,7 +89,8 @@ public class Vungle extends CordovaPlugin {
 	protected String TEST_APP_ID = "com.cranberrygame.pluginsforcordova";
 	//
 	protected String appId;
-	
+	protected String clientId;
+
 	// get the VunglePub instance
 	final VunglePub vunglePub = VunglePub.getInstance();
 	
@@ -198,14 +199,15 @@ public class Vungle extends CordovaPlugin {
 		//Log.d(LOG_TAG, String.format("%b", isOverlap));
 		//Log.d(LOG_TAG, String.format("%b", isTest));	
 		final String appId = args.getString(0);
-		Log.d(LOG_TAG, String.format("%s", appId));			
+		final String clientId = args.getString(1);
+		Log.d(LOG_TAG, String.format("%s, %s", appId, clientId));
 		
 		callbackContextKeepCallback = callbackContext;
 			
 		cordova.getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				_setUp(appId);
+				_setUp(appId, clientId);
 			}
 		});
 	}
@@ -253,14 +255,17 @@ public class Vungle extends CordovaPlugin {
 		//	Util.alert(cordova.getActivity(),"Cordova Vungle: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");
 	}
 	
-	private void _setUp(String appId) {
+	private void _setUp(String appId, String clientId) {
 		this.appId = appId;
+		this.clientId = clientId;
 
 		vunglePub.init(cordova.getActivity(), appId);
 		vunglePub.setEventListeners(new MyEventListener());//listener needs to come after init on android vunlge sdk
 		
 		final AdConfig config = vunglePub.getGlobalAdConfig();
 		config.setOrientation(Orientation.autoRotate);//for android
+		config.setIncentivized(true); // Enabling server-side validation
+		config.setIncentivizedUserId(clientId); // Setting client id
 		//config.setOrientation(Orientation.matchVideo);
 	}
 	

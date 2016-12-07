@@ -45,12 +45,13 @@ static NSString *TEST_APP_ID = @"5556444b4b79673719000185";
     //NSLog(@"%d", isOverlap);
     //NSLog(@"%d", isTest);
 	NSString* appId = [command.arguments objectAtIndex:0];
-	NSLog(@"%@", appId);
+	NSString* clientId = [command.arguments objectAtIndex:1];
+	NSLog(@"%@, %@", appId, clientId);
 	
     self.callbackIdKeepCallback = command.callbackId;
 	
     //[self.commandDelegate runInBackground:^{
-		[self _setUp:appId];	
+		[self _setUp:appId clientId:clientId];
     //}];
 }
 
@@ -106,8 +107,9 @@ static NSString *TEST_APP_ID = @"5556444b4b79673719000185";
     return  output;
 }
 
-- (void) _setUp:(NSString *)appId {
+- (void) _setUp:(NSString *)appId clientId:(NSString *)clientId {
 	self.appId = appId;
+	self.clientId = clientId;
 
     VungleSDK* sdk = [VungleSDK sharedSDK];
     [sdk setDelegate:self];//listener need to come before startWithAppId on ios vunlge sdk
@@ -115,12 +117,10 @@ static NSString *TEST_APP_ID = @"5556444b4b79673719000185";
 }
 
 -(void) _showRewardedVideoAd {
-    NSMutableDictionary* config = [[NSMutableDictionary alloc] init];
+    //NSMutableDictionary* config = [[NSMutableDictionary alloc] init];
 	//[config setObject:[config objectForKey:@"orientation"] forKey:VunglePlayAdOptionKeyOrientations]; // !! Be careful, not the same behaviour with android
-    //NSDictionary* config = @{VunglePlayAdOptionKeyOrientations: @(UIInterfaceOrientationMaskLandscape),
-	//	VunglePlayAdOptionKeyIncentivized: @(YES),
-	//	VunglePlayAdOptionKeyUser: @"user",
-	//	VunglePlayAdOptionKeyExtraInfoDictionary: @{VunglePlayAdOptionKeyExtra1: @"21", VunglePlayAdOptionKeyExtra2: @"Female"}};
+    NSDictionary* config = @{VunglePlayAdOptionKeyIncentivized: @(YES),
+		VunglePlayAdOptionKeyUser: self.clientId};
     [[VungleSDK sharedSDK] playAd:self.viewController withOptions:config];
     //NSError *error;
 	//[[VungleSDK sharedSDK] playAd:self.viewController error:&error];

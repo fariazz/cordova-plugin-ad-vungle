@@ -15,6 +15,7 @@
 @property BOOL validLicenseKey;
 //
 @property NSString *appId;
+@property NSString *clientId;
 
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command;
 - (void) setUp:(CDVInvokedUrlCommand*)command;

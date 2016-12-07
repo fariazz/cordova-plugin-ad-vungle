@@ -2,17 +2,7 @@
 module.exports = {
 	_loadedRewardedVideoAd: false,
 	_isShowingRewardedVideoAd: false,	
-	setLicenseKey: function (email, licenseKey) {
-		var self = this;	
-        cordova.exec(
-            null,
-            null,
-            'Vungle',
-            'setLicenseKey',			
-            [email, licenseKey]
-        ); 
-    },
-	setUp: function (appId) {
+	setUp: function (appId, clientId) {
 		var self = this;	
         cordova.exec(
 			function (result) {
@@ -67,7 +57,7 @@ module.exports = {
 			},
             'Vungle',
             'setUp',			
-			[appId]
+			[appId, clientId]
         ); 
     },
     showRewardedVideoAd: function () {
