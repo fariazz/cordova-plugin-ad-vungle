@@ -68,8 +68,8 @@ public class Vungle extends CordovaPlugin {
                     AlertDialog.Builder ab = new AlertDialog.Builder(cordova.getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
 
                     ab
-                        .setTitle("Hey!")
-                        .setMessage("Requested permission is required for displaying ads. Without this permission ad availibility will be limited.")
+                        .setTitle("Enable Free Coin Rewards")
+                        .setMessage("We need the requested permission for video rewards to work properly. Video rewards are a way for users to get free coins within the app. Without this permission enabled, video ad availability will be extremely limited and waiting times will be longer.")
                         .setNegativeButton("Skip", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -251,7 +251,7 @@ public class Vungle extends CordovaPlugin {
                 //callbackContextKeepCallback.sendPluginResult(pr);
             } else {
                 Log.d(LOG_TAG, "onVideoView: not completed");
-/*				
+/*
                 PluginResult pr = new PluginResult(PluginResult.Status.OK, "onRewardedVideoAdNotCompleted");
 				pr.setKeepCallback(true);
 				callbackContextKeepCallback.sendPluginResult(pr);
@@ -262,4 +262,4 @@ public class Vungle extends CordovaPlugin {
             }
         }
     }
-} 
+}
